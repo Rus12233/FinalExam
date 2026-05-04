@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git remote:*)",
+      "Bash(mkdir -p /c/App/lib/models /c/App/lib/screens /c/App/lib/widgets /c/App/lib/providers /c/App/lib/utils)",
+      "Bash(mkdir -p /c/App/docs /c/App/.planning/decisions)",
+      "Bash(mkdir -p /c/App/assets/images /c/App/assets/sounds)",
+      "Bash(flutter pub:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
