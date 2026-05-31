@@ -11,14 +11,14 @@ class WriteScreen extends StatefulWidget {
 
 class _WriteScreenState extends State<WriteScreen> {
   final _controller = TextEditingController();
-  String _selectedMood = 'neutral';
   bool _isSaving = false;
+  String _selectedMood = 'neutral';
 
-  final _moods = [
-    {'key': 'happy', 'emoji': '😊', 'label': '행복'},
-    {'key': 'grateful', 'emoji': '🙏', 'label': '감사'},
-    {'key': 'neutral', 'emoji': '😌', 'label': '평온'},
-    {'key': 'sad', 'emoji': '😢', 'label': '슬픔'},
+  static const _moods = [
+    ('happy', '😊', '행복'),
+    ('grateful', '🙏', '감사'),
+    ('neutral', '😌', '보통'),
+    ('sad', '😢', '슬픔'),
   ];
 
   @override
@@ -40,7 +40,7 @@ class _WriteScreenState extends State<WriteScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('💧 화분에 물을 줬어요! 잘 자라고 있어요'),
-          backgroundColor: Colors.green.shade400,
+          backgroundColor: const Color(0xFF8FBA78),
           behavior: SnackBarBehavior.floating,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -52,26 +52,26 @@ class _WriteScreenState extends State<WriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F7EC),
+      backgroundColor: const Color(0xFFF8F4EC),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.close, color: Colors.green.shade800),
+          icon: const Icon(Icons.close, color: Color(0xFF4A6B3A)),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
+        title: const Text(
           '오늘의 기록',
           style: TextStyle(
-              color: Colors.green.shade800, fontWeight: FontWeight.bold),
+              color: Color(0xFF4A6B3A), fontWeight: FontWeight.bold),
         ),
         actions: [
           TextButton(
             onPressed: _isSaving ? null : _save,
-            child: Text(
+            child: const Text(
               '물주기 💧',
               style: TextStyle(
-                color: Colors.green.shade600,
+                color: Color(0xFF6B9B5E),
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),
@@ -84,52 +84,73 @@ class _WriteScreenState extends State<WriteScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 기분 선택
-            Text('오늘 기분은?',
+            // 감정 선택
+            const Text('오늘 기분이 어때요?',
                 style: TextStyle(
-                    color: Colors.green.shade700,
+                    color: Color(0xFF5B7A4E),
                     fontWeight: FontWeight.w600)),
-            const SizedBox(height: 12),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: _moods.map((mood) {
-                final isSelected = _selectedMood == mood['key'];
+              children: _moods.map((m) {
+                final isSelected = _selectedMood == m.$1;
                 return GestureDetector(
-                  onTap: () => setState(() => _selectedMood = mood['key']!),
+                  onTap: () => setState(() => _selectedMood = m.$1),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 10),
+                        horizontal: 14, vertical: 10),
                     decoration: BoxDecoration(
                       color: isSelected
-                          ? Colors.green.shade100
+                          ? const Color(0xFF8FBA78)
                           : Colors.white,
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(14),
                       border: Border.all(
                         color: isSelected
-                            ? Colors.green.shade400
-                            : Colors.transparent,
-                        width: 2,
+                            ? const Color(0xFF6B9B5E)
+                            : const Color(0xFFD8EDCA),
+                        width: 1.5,
                       ),
+                      boxShadow: isSelected
+                          ? [
+                              BoxShadow(
+                                color: const Color(0xFF8FBA78)
+                                    .withValues(alpha: 0.3),
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
+                              )
+                            ]
+                          : [],
                     ),
                     child: Column(
                       children: [
-                        Text(mood['emoji']!,
-                            style: const TextStyle(fontSize: 24)),
-                        Text(mood['label']!,
-                            style: const TextStyle(fontSize: 11)),
+                        Text(m.$2,
+                            style: const TextStyle(fontSize: 22)),
+                        const SizedBox(height: 2),
+                        Text(
+                          m.$3,
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: isSelected
+                                ? Colors.white
+                                : Colors.grey.shade500,
+                            fontWeight: isSelected
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 );
               }).toList(),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
 
             // 일기 입력
-            Text('오늘 있었던 일을 적어보세요 🌱',
+            const Text('오늘 있었던 일을 적어보세요 🌱',
                 style: TextStyle(
-                    color: Colors.green.shade700,
+                    color: Color(0xFF5B7A4E),
                     fontWeight: FontWeight.w600)),
             const SizedBox(height: 12),
             Expanded(
@@ -139,9 +160,9 @@ class _WriteScreenState extends State<WriteScreen> {
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.green.withOpacity(0.08),
-                      blurRadius: 12,
-                      offset: const Offset(0, 2),
+                      color: const Color(0xFF8FBA78).withValues(alpha: 0.10),
+                      blurRadius: 14,
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),

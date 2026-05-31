@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F7EC),
+      backgroundColor: const Color(0xFFF8F4EC),
       body: SafeArea(
         child: Consumer<DiaryProvider>(
           builder: (context, provider, _) {
@@ -26,12 +26,12 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         '나의 숲',
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Colors.green.shade800,
+                          color: Color(0xFF4A6B3A),
                         ),
                       ),
                       IconButton(
@@ -41,8 +41,8 @@ class HomeScreen extends StatelessWidget {
                             builder: (_) => const DiaryListScreen(),
                           ),
                         ),
-                        icon: Icon(Icons.menu_book_rounded,
-                            color: Colors.green.shade700),
+                        icon: const Icon(Icons.menu_book_rounded,
+                            color: Color(0xFF5B7A4E)),
                       ),
                     ],
                   ),
@@ -81,11 +81,13 @@ class HomeScreen extends StatelessWidget {
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green.shade500,
+                        backgroundColor: const Color(0xFF8FBA78),
                         foregroundColor: Colors.white,
+                        elevation: 0,
+                        shadowColor: Colors.transparent,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(18),
                         ),
                       ),
                     ),
@@ -117,9 +119,9 @@ class HomeScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.green.withOpacity(0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            color: const Color(0xFF8FBA78).withValues(alpha: 0.12),
+            blurRadius: 10,
+            offset: const Offset(0, 3),
           ),
         ],
       ),

@@ -7,7 +7,13 @@
       "Bash(mkdir -p /c/App/docs /c/App/.planning/decisions)",
       "Bash(mkdir -p /c/App/assets/images /c/App/assets/sounds)",
       "Bash(flutter pub:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(where claude:*)",
+      "Bash(claude --version)",
+      "Bash(flutter --version)",
+      "Bash(flutter run *)"
     ]
   }
 }

@@ -15,11 +15,11 @@ class GrowthProgressBar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               '성장도',
               style: TextStyle(
                 fontSize: 13,
-                color: Colors.green.shade700,
+                color: Color(0xFF5B7A4E),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -35,8 +35,8 @@ class GrowthProgressBar extends StatelessWidget {
           child: LinearProgressIndicator(
             value: plantState.growthPercent,
             minHeight: 10,
-            backgroundColor: Colors.green.shade100,
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.green.shade400),
+            backgroundColor: const Color(0xFFD8EDCA),
+            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF8FBA78)),
           ),
         ).animate().scaleX(
               begin: 0,

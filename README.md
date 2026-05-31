@@ -1,17 +1,59 @@
-# green_diary
+# 나의 숲 (My Forest)
 
-A new Flutter project.
+> 일기를 쓸 때마다 화분에 물이 주어지고 식물이 자라는 감성 다이어리 Flutter 앱
 
-## Getting Started
+## 스크린샷
 
-This project is a starting point for a Flutter application.
+| 홈 화면 (씨앗) | 새싹 단계 | 나무 단계 |
+|:-:|:-:|:-:|
+| 🌰 | 🌱 | 🌳 |
 
-A few resources to get you started if this is your first Flutter project:
+## 핵심 기능
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- **일기 작성** — 제목 + 본문 저장
+- **식물 성장** — 일기 수에 따라 씨앗 → 새싹 → 어린나무 → 나무 → 숲으로 진화
+- **물방울 파티클** — 일기 저장 시 물주기 애니메이션 재생
+- **기록 목록** — 과거 일기 날짜순 조회
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 빠른 시작
+
+```bash
+# 1. 패키지 설치
+flutter pub get
+
+# 2. 앱 실행
+flutter run           # 연결된 기기
+flutter run -d chrome # 웹 브라우저
+```
+
+자세한 환경 설정은 [docs/setup.md](docs/setup.md)를 참고하세요.
+
+## 식물 성장 기준
+
+| 단계 | 총 일기 수 |
+|------|-----------|
+| 🌰 씨앗 | 0개 |
+| 🌱 새싹 | 1~4개 |
+| 🌿 어린나무 | 5~9개 |
+| 🌳 나무 | 10~19개 |
+| 🌲 숲 | 20개 이상 |
+
+## 기술 스택
+
+| 영역 | 기술 |
+|------|------|
+| 프레임워크 | Flutter 3.x / Dart 3.4+ |
+| 상태 관리 | Provider (ChangeNotifier) |
+| 로컬 저장소 | Hive |
+| 애니메이션 | flutter_animate |
+
+## 문서
+
+- [환경 설정](docs/setup.md)
+- [빌드 & 배포](docs/deploy.md)
+- [테스트](docs/testing.md)
+- [아키텍처](docs/architecture.md)
+
+## 라이선스
+
+MIT

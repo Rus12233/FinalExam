@@ -1,30 +1,62 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:green_diary/main.dart';
+import 'package:green_diary/models/plant_state.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  final now = DateTime.now();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  group('PlantState 단계 계산', () {
+    test('0개 → 씨앗', () {
+      final s = PlantState(totalEntries: 0, waterDrops: 0, lastWatered: now);
+      expect(s.stage, PlantStage.seed);
+      expect(s.stageEmoji, '🌰');
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    test('1개 → 새싹', () {
+      final s = PlantState(totalEntries: 1, waterDrops: 0, lastWatered: now);
+      expect(s.stage, PlantStage.sprout);
+    });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    test('4개 → 새싹 (경계값)', () {
+      final s = PlantState(totalEntries: 4, waterDrops: 0, lastWatered: now);
+      expect(s.stage, PlantStage.sprout);
+    });
+
+    test('5개 → 어린나무 (경계값)', () {
+      final s = PlantState(totalEntries: 5, waterDrops: 0, lastWatered: now);
+      expect(s.stage, PlantStage.sapling);
+    });
+
+    test('9개 → 어린나무 (경계값)', () {
+      final s = PlantState(totalEntries: 9, waterDrops: 0, lastWatered: now);
+      expect(s.stage, PlantStage.sapling);
+    });
+
+    test('10개 → 나무 (경계값)', () {
+      final s = PlantState(totalEntries: 10, waterDrops: 0, lastWatered: now);
+      expect(s.stage, PlantStage.tree);
+    });
+
+    test('19개 → 나무 (경계값)', () {
+      final s = PlantState(totalEntries: 19, waterDrops: 0, lastWatered: now);
+      expect(s.stage, PlantStage.tree);
+    });
+
+    test('20개 → 숲 (경계값)', () {
+      final s = PlantState(totalEntries: 20, waterDrops: 0, lastWatered: now);
+      expect(s.stage, PlantStage.forest);
+      expect(s.stageEmoji, '🌲');
+    });
+  });
+
+  group('PlantState growthPercent', () {
+    test('씨앗 → 0.0', () {
+      final s = PlantState(totalEntries: 0, waterDrops: 0, lastWatered: now);
+      expect(s.growthPercent, 0.0);
+    });
+
+    test('숲 → 1.0', () {
+      final s = PlantState(totalEntries: 20, waterDrops: 0, lastWatered: now);
+      expect(s.growthPercent, 1.0);
+    });
   });
 }
