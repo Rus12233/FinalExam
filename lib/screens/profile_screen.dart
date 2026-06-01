@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../providers/auth_provider.dart';
 import '../providers/diary_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -32,6 +33,12 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildHeader(BuildContext context, DiaryProvider provider) {
+    final auth = context.watch<AuthProvider>();
+    final displayName = auth.isGuest
+        ? '게스트'
+        : (auth.user?.nickname ?? provider.nickname);
+    final email = auth.user?.email;
+
     return Column(
       children: [
         Row(
@@ -45,10 +52,12 @@ class ProfileScreen extends StatelessWidget {
                 color: Color(0xFF4A6B3A),
               ),
             ),
-            IconButton(
-              icon: const Icon(Icons.edit_outlined, color: Color(0xFF5B7A4E)),
-              onPressed: () => _showNicknameDialog(context, provider),
-            ),
+            if (!auth.isGuest)
+              IconButton(
+                icon: const Icon(Icons.edit_outlined,
+                    color: Color(0xFF5B7A4E)),
+                onPressed: () => _showNicknameDialog(context, provider),
+              ),
           ],
         ),
         const SizedBox(height: 20),
@@ -62,23 +71,31 @@ class ProfileScreen extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              provider.plantState.stageEmoji,
+              auth.isGuest ? '🌱' : provider.plantState.stageEmoji,
               style: const TextStyle(fontSize: 44),
             ),
           ),
         ),
         const SizedBox(height: 12),
         Text(
-          provider.nickname,
+          displayName,
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Color(0xFF4A6B3A),
           ),
         ),
+        if (email != null) ...[
+          const SizedBox(height: 4),
+          Text(
+            email,
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+          ),
+        ],
         const SizedBox(height: 6),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+          padding:
+              const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
           decoration: BoxDecoration(
             color: const Color(0xFF8FBA78).withValues(alpha: 0.18),
             borderRadius: BorderRadius.circular(20),
@@ -448,6 +465,13 @@ class ProfileScreen extends StatelessWidget {
             color: Colors.red.shade400,
             onTap: () => _showClearDialog(context, provider),
           ),
+          const Divider(height: 1, indent: 54),
+          _tile(
+            icon: Icons.logout,
+            label: '로그아웃',
+            color: Colors.red.shade400,
+            onTap: () => _showLogoutDialog(context),
+          ),
         ],
       ),
     );
@@ -511,6 +535,40 @@ class ProfileScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12)),
             ),
             child: const Text('저장'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20)),
+        title: const Text('로그아웃'),
+        content: const Text(
+          '로그아웃 하시겠어요?\n다시 로그인하면 데이터는 유지됩니다.',
+          style: TextStyle(height: 1.5),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('취소'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              context.read<AuthProvider>().logout();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red.shade400,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
+            ),
+            child: const Text('로그아웃'),
           ),
         ],
       ),

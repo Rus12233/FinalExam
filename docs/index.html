@@ -432,9 +432,26 @@
 <section id="screens">
   <div class="container">
     <p class="sec-label fade-in">구현된 화면 · 기능</p>
-    <h2 class="fade-in delay-1">3개 화면<br><span style="color:var(--leaf)">전체 구현</span> 완료</h2>
+    <h2 class="fade-in delay-1">4개 화면<br><span style="color:var(--leaf)">전체 구현</span> 완료</h2>
 
     <div class="screen-grid fade-in delay-2">
+      <!-- 로그인 -->
+      <div class="screen-card">
+        <div class="screen-card-head">
+          <span class="icon">🔐</span>
+          <h4>로그인 화면</h4>
+        </div>
+        <div class="screen-card-body">
+          <ul class="feature-list">
+            <li>이메일·비밀번호 로그인 / 회원가입 (탭 전환)</li>
+            <li>닉네임 설정 (회원가입 시)</li>
+            <li>게스트로 시작하기 (로그인 불필요)</li>
+            <li>입력 유효성 검사 + 에러 배너</li>
+            <li>로그인 상태 Hive 영구 저장</li>
+          </ul>
+        </div>
+      </div>
+
       <!-- 홈 -->
       <div class="screen-card">
         <div class="screen-card-head">
@@ -479,11 +496,12 @@
         <div class="screen-card-body">
           <ul class="feature-list">
             <li>닉네임 표시 + 수정 (최대 15자)</li>
+            <li>로그인 시 이메일 표시 / 게스트 구분</li>
             <li>통계: 총 기록 / 연속 기록 / 총 물방울</li>
             <li>식물 성장 여정 (5단계 달성 현황)</li>
             <li>감정 분포 차트</li>
             <li>업적 시스템 6종</li>
-            <li>설정: 닉네임 변경 / 전체 기록 삭제</li>
+            <li>설정: 닉네임 변경 / 전체 기록 삭제 / 로그아웃</li>
           </ul>
         </div>
       </div>
@@ -628,15 +646,21 @@
           <tr><td>3.6</td><td>업적 시스템 6종</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
           <tr><td>3.7</td><td>전체 감정 분포 차트</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
 
-          <tr class="phase-header"><td colspan="4">✨ Phase 4 — 애니메이션 & 감성 UX</td></tr>
-          <tr><td>4.1</td><td>물방울 파티클 애니메이션 (저장 시)</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
-          <tr><td>4.2</td><td>식물 성장 전환 애니메이션</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
-          <tr><td>4.3</td><td>감성 색상 테마 (단계별 배경색)</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
+          <tr class="phase-header"><td colspan="4">🔐 Phase 4 — 인증 시스템</td></tr>
+          <tr><td>4.1</td><td>AuthProvider — 로그인·회원가입·게스트 모드</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
+          <tr><td>4.2</td><td>로그인 화면 — 탭 전환·유효성 검사·에러 배너</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
+          <tr><td>4.3</td><td>AuthGate — 로그인 상태에 따른 화면 자동 라우팅</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
+          <tr><td>4.4</td><td>로그아웃 + 세션 Hive 영구 저장</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
 
-          <tr class="phase-header"><td colspan="4">🧪 Phase 5 — 테스트 & 마무리</td></tr>
-          <tr><td>5.1</td><td>단위 테스트 (PlantState 경계값 8개)</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
-          <tr><td>5.2</td><td>Android / iOS / Web 빌드 확인</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
-          <tr><td>5.3</td><td>README · GitHub Pages 정비</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
+          <tr class="phase-header"><td colspan="4">✨ Phase 5 — 애니메이션 & 감성 UX</td></tr>
+          <tr><td>5.1</td><td>물방울 파티클 애니메이션 (저장 시)</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
+          <tr><td>5.2</td><td>식물 성장 전환 애니메이션</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
+          <tr><td>5.3</td><td>감성 색상 테마 (단계별 배경색)</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
+
+          <tr class="phase-header"><td colspan="4">🧪 Phase 6 — 테스트 & 마무리</td></tr>
+          <tr><td>6.1</td><td>단위 테스트 (PlantState 경계값 8개)</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
+          <tr><td>6.2</td><td>Android / iOS / Web 빌드 확인</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
+          <tr><td>6.3</td><td>README · GitHub Pages 정비</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
         </tbody>
       </table>
     </div>
@@ -653,19 +677,23 @@
       <div class="mermaid">
 graph TD
     subgraph UI["🖥️ Presentation Layer (Flutter Widgets)"]
+        L["🔐 LoginScreen<br/>(로그인·회원가입·게스트)"]
+        G2["🚪 AuthGate<br/>(로그인 여부 라우팅)"]
         A["🏠 HomeScreen<br/>(식물·진행바·통계)"]
         B["📅 CalendarScreen<br/>(달력·기분dot·빠른작성)"]
-        C["👤 ProfileScreen<br/>(통계·업적·감정분포)"]
+        C["👤 ProfileScreen<br/>(통계·업적·감정분포·로그아웃)"]
         S["🔀 MainShell<br/>(BottomNavigationBar)"]
     end
 
     subgraph STATE["⚙️ State Management (Provider / ChangeNotifier)"]
+        AP["AuthProvider<br/>• 로그인·회원가입<br/>• 게스트 모드<br/>• 로그아웃<br/>• 세션 복원"]
         D["DiaryProvider<br/>• 일기 CRUD<br/>• 식물 단계 계산<br/>• streak 계산<br/>• 감정 분포<br/>• 파티클 트리거"]
     end
 
     subgraph DATA["💾 Data Layer (Hive)"]
         E["DiaryBox<br/>(로컬 NoSQL)"]
         F["SettingsBox<br/>(닉네임)"]
+        AU["AuthBox<br/>(세션·계정 정보)"]
         G["DiaryEntry<br/>id·content·mood·createdAt"]
     end
 
@@ -673,8 +701,13 @@ graph TD
         H["flutter_animate<br/>파티클·식물전환"]
     end
 
+    G2 -->|"로그인됨"| S
+    G2 -->|"미로그인"| L
+    L -->|"login/register/guest"| AP
     S --> A & B & C
     A & B & C -->|"Consumer"| D
+    C -->|"Consumer"| AP
+    AP -->|"CRUD"| AU
     D -->|"CRUD"| E
     D -->|"get/set nickname"| F
     E --- G
@@ -706,8 +739,12 @@ graph TD
         <div class="t-val">flutter_animate</div>
       </div>
       <div class="tech-item">
+        <div class="t-label">인증</div>
+        <div class="t-val">이메일·비밀번호 / 게스트 모드</div>
+      </div>
+      <div class="tech-item">
         <div class="t-label">화면 수</div>
-        <div class="t-val">3개 (홈·달력·프로필)</div>
+        <div class="t-val">4개 (로그인·홈·달력·프로필)</div>
       </div>
       <div class="tech-item">
         <div class="t-label">업적</div>

@@ -23,12 +23,13 @@ flutter build web --release --base-href "/app/"  # 웹 빌드
 
 ```
 lib/
-├── main.dart              # Hive 초기화, ChangeNotifierProvider 주입
+├── main.dart              # Hive 초기화, ChangeNotifierProvider 주입, AuthGate 라우팅
 ├── models/
 │   ├── diary_entry.dart   # Hive 저장 모델 (@HiveType)
 │   ├── diary_entry.g.dart # TypeAdapter (수동 작성, 빌드러너 불필요)
 │   └── plant_state.dart   # 식물 단계 계산 순수 모델 (저장소 없음)
 ├── providers/
+│   ├── auth_provider.dart   # 로그인·회원가입·게스트·로그아웃 + Hive 세션
 │   └── diary_provider.dart  # 모든 비즈니스 로직 + ChangeNotifier
 ├── screens/               # 화면 단위 위젯
 └── widgets/               # 재사용 가능한 UI 조각
