@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'models/diary_entry.dart';
 import 'providers/diary_provider.dart';
-import 'screens/home_screen.dart';
+import 'screens/main_shell.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +32,7 @@ class GreenDiaryApp extends StatelessWidget {
           ),
           useMaterial3: true,
         ),
-        home: const HomeScreen(),
+        home: const MainShell(),
       ),
     );
   }

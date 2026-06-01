@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import '../models/plant_state.dart';
 
 class GrowthProgressBar extends StatelessWidget {
@@ -30,21 +29,21 @@ class GrowthProgressBar extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 6),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: LinearProgressIndicator(
-            value: plantState.growthPercent,
-            minHeight: 10,
-            backgroundColor: const Color(0xFFD8EDCA),
-            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF8FBA78)),
-          ),
-        ).animate().scaleX(
-              begin: 0,
-              end: 1,
-              duration: 800.ms,
-              curve: Curves.easeOut,
-              alignment: Alignment.centerLeft,
+        TweenAnimationBuilder<double>(
+          tween: Tween(begin: 0.0, end: plantState.growthPercent),
+          duration: const Duration(milliseconds: 700),
+          curve: Curves.easeOut,
+          builder: (context, value, _) => ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: LinearProgressIndicator(
+              value: value,
+              minHeight: 10,
+              backgroundColor: const Color(0xFFD8EDCA),
+              valueColor:
+                  const AlwaysStoppedAnimation<Color>(Color(0xFF8FBA78)),
             ),
+          ),
+        ),
         const SizedBox(height: 4),
         Text(
           _nextStageHint(),
