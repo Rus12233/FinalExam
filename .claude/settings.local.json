@@ -13,7 +13,15 @@
       "Bash(where claude:*)",
       "Bash(claude --version)",
       "Bash(flutter --version)",
-      "Bash(flutter run *)"
+      "Bash(flutter run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/)",
+      "Bash(node -e \"require\\('playwright'\\)\")",
+      "Bash(npx playwright *)",
+      "Bash(Get-Process -Name \"dart\" -ErrorAction SilentlyContinue)",
+      "Bash(Stop-Process -Force)",
+      "Bash(Get-Process -Name \"flutter_tester\" -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Process *)",
+      "Bash(echo \"PID=$!\")"
     ]
   }
 }
