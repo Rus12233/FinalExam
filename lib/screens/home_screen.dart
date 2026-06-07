@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/diary_provider.dart';
 import '../widgets/plant_widget.dart';
 import '../widgets/growth_progress_bar.dart';
+import 'write_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,12 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
               .entriesForMonth(_selectedMonth.year, _selectedMonth.month)
               .length;
 
-          return Padding(
-            padding: const EdgeInsets.all(24),
+          return SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(24, 24, 24, 100),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // 헤더 (버튼 없음)
+                // 헤더
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -69,6 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 // 통계
                 _buildStats(monthCount, plant.waterDrops),
+                const SizedBox(height: 20),
+
+                // 오늘 기록 유도 카드
+                _buildTodayCard(context, provider),
               ],
             ),
           );
@@ -129,6 +134,127 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ],
+    );
+  }
+
+  Widget _buildTodayCard(BuildContext context, DiaryProvider provider) {
+    final today = DateTime.now();
+    final todayEntries = provider.entriesForDate(today);
+
+    if (todayEntries.isEmpty) {
+      return GestureDetector(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const WriteScreen()),
+        ),
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                const Color(0xFF8FBA78).withValues(alpha: 0.18),
+                const Color(0xFFD8EDCA).withValues(alpha: 0.25),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: const Color(0xFF8FBA78).withValues(alpha: 0.45),
+              width: 1.5,
+            ),
+          ),
+          child: Row(
+            children: [
+              const Text('🌱', style: TextStyle(fontSize: 30)),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      '오늘의 기록을 남겨보세요',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF4A6B3A),
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      '한 줄이라도 괜찮아요 🙂',
+                      style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF6B9B5E),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Text(
+                  '기록하기',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFEEF4EA),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: const Color(0xFF8FBA78).withValues(alpha: 0.3),
+        ),
+      ),
+      child: Row(
+        children: [
+          const Text('✅', style: TextStyle(fontSize: 22)),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              '오늘 ${todayEntries.length}개 기록 완료!',
+              style: const TextStyle(
+                color: Color(0xFF4A6B3A),
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const WriteScreen()),
+            ),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+              decoration: BoxDecoration(
+                color: const Color(0xFF8FBA78).withValues(alpha: 0.22),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Text(
+                '+ 추가',
+                style: TextStyle(
+                  color: Color(0xFF4A6B3A),
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

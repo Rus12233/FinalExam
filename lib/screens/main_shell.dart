@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'calendar_screen.dart';
 import 'profile_screen.dart';
+import 'write_screen.dart';
 
 class MainShell extends StatefulWidget {
   const MainShell({super.key});
@@ -27,6 +28,20 @@ class _MainShellState extends State<MainShell> {
         index: _index,
         children: _pages,
       ),
+      floatingActionButton: _index == 0
+          ? FloatingActionButton.extended(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const WriteScreen()),
+              ),
+              backgroundColor: const Color(0xFF6B9B5E),
+              foregroundColor: Colors.white,
+              icon: const Icon(Icons.edit_rounded),
+              label: const Text('일기 쓰기',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+              elevation: 4,
+            )
+          : null,
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Colors.white,

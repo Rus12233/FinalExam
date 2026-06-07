@@ -578,6 +578,9 @@
             <li>이달 기록 수 / 총 물방울 통계 카드</li>
             <li>💧 물방울 파티클 애니메이션 (저장 시)</li>
             <li>월 네비게이션 (이전/다음 달)</li>
+            <li>✍️ <strong>홈에서 바로 일기 쓰기</strong> — FAB 버튼으로 즉시 작성</li>
+            <li>오늘 기록 없을 때 작성 유도 카드 표시</li>
+            <li>오늘 기록 완료 시 건수 확인 + 추가 작성 지원</li>
           </ul>
         </div>
       </div>
@@ -746,6 +749,7 @@
           <tr><td>2.3</td><td>식물 성장 단계 로직 (일기 수 기반)</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
           <tr><td>2.4</td><td>홈 화면 — 5단계 식물 + 성장 진행바</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
           <tr><td>2.5</td><td>하단 네비게이션 (홈/달력/프로필)</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
+          <tr><td>2.6</td><td>홈 화면 일기 작성 FAB + 오늘 기록 유도 카드</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
 
           <tr class="phase-header"><td colspan="4">📅 Phase 3 — 달력 & 프로필</td></tr>
           <tr><td>3.1</td><td>달력 화면 — 월별 그리드 + 기분 dot</td><td><span class="status done">완료</span></td><td><span class="progress-bar-wrap"><span class="progress-bar-fill" style="width:100%"></span></span></td></tr>
@@ -789,7 +793,7 @@ graph TD
     subgraph UI["🖥️ Presentation Layer (Flutter Widgets)"]
         L["🔐 LoginScreen<br/>(로그인·회원가입·게스트)"]
         G2["🚪 AuthGate<br/>(로그인 여부 라우팅)"]
-        A["🏠 HomeScreen<br/>(식물·진행바·통계)"]
+        A["🏠 HomeScreen<br/>(식물·진행바·통계·일기쓰기)"]
         B["📅 CalendarScreen<br/>(달력·기분dot·빠른작성)"]
         C["👤 ProfileScreen<br/>(통계·업적·감정분포·로그아웃)"]
         S["🔀 MainShell<br/>(BottomNavigationBar)"]
