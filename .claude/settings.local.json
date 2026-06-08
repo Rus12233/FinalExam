@@ -21,7 +21,8 @@
       "Bash(Stop-Process -Force)",
       "Bash(Get-Process -Name \"flutter_tester\" -ErrorAction SilentlyContinue)",
       "PowerShell(Get-Process *)",
-      "Bash(echo \"PID=$!\")"
+      "Bash(echo \"PID=$!\")",
+      "Bash(flutter analyze *)"
     ]
   }
 }
